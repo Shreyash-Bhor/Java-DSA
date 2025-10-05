@@ -1,41 +1,67 @@
 /* Date: 28-09-2025 
 * Problem Statement :
-* 1. To print all the subarrays in an array of integers.
-* 2. To calculate the sum of all the subarrays.
-* 3. To find the min and max sum among the subarrays.
+* Max Subarray Sum : Find the subarray with the largest sum
 */
 package Arrays;
 
+import java.util.*;
+
 public class Subarrays {
-    public static void printSubarrays(int arr[]) {
-        int sum = 0;
-        int min_sum = Integer.MAX_VALUE;
-        int max_sum = 0;
+    // #1 Brute Force
+    // Time Complexity - O(n^3)
+    public static void maxSubarraySum(int arr[]) {
+
+        int maxSum = Integer.MIN_VALUE;
+        int currSum = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = i; j < arr.length; j++) {
                 for (int k = i; k <= j; k++) {
                     System.out.print(arr[k] + " ");
-                    sum = sum + arr[k];
-
+                    currSum += arr[k];
                 }
-                System.out.println("Sum is :" + sum);
-                if (sum < min_sum) {
-                    min_sum = sum;
-                } else if (sum > max_sum) {
-                    max_sum = sum;
+                System.out.println("Sum is: " + currSum);
+                if (maxSum < currSum) {
+                    maxSum = currSum;
                 }
-                sum = 0;
-                System.out.println();
+                currSum = 0;
             }
             System.out.println();
         }
-        System.out.println("Minimum sum is: " + min_sum);
-        System.out.println("Maximum sum is: " + max_sum);
+        System.out.println("Maximum sum is: " + maxSum);
+    }
+
+    // #2 Prefix Sum
+    public static void prefixSumSubarrays(int arr[]) {
+        int maxSum = Integer.MIN_VALUE;
+        int currSum = 0;
+        int prefix[] = new int[arr.length];
+        prefix[0] = arr[0];
+        for (int i = 1; i < prefix.length; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                currSum = i == 0 ? prefix[j] : prefix[j] - prefix[i - 1];
+                System.out.print(arr[j] + " ");
+                if (maxSum < currSum) {
+                    maxSum = currSum;
+                }
+            }
+            System.out.println("currSum = " + currSum);
+        }
+        System.out.println("maxSum = " + maxSum);
     }
 
     public static void main(String args[]) {
-        System.out.println("");
-        int arr[] = { 2, 4, 6, 8, 10 };
-        printSubarrays(arr);
+        System.out.println();
+        Scanner sc = new Scanner(System.in);
+        int numbers[] = new int[5];
+        for (int i = 0; i < numbers.length; i++) {
+            System.out.println("Enter numbers: ");
+            numbers[i] = sc.nextInt();
+        }
+        // maxSubarraySum(numbers);
+        prefixSumSubarrays(numbers);
     }
 }
