@@ -61,22 +61,18 @@ public class Subarrays {
 
         for (int i = 0; i < arr.length; i++) {
             currSum += arr[i];
-            if (isNegative(arr)) {
-                maxSum = currSum; // set maxSum as currSum.
-            }
             maxSum = Math.max(currSum, maxSum);
+            if (currSum < 0) {
+                currSum = 0;
+            }
+        }
+        if (maxSum == 0) {
+            maxSum = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                maxSum = Math.max(maxSum, arr[i]);
+            }
         }
         System.out.println("Maximum sum : " + maxSum);
-    }
-
-    // Function to check whether complete array is negative.
-    public static boolean isNegative(int arr[]) {
-        for (int i : arr) {
-            if (i < 0) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static void main(String args[]) {
