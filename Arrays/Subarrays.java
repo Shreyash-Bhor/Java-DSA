@@ -53,6 +53,32 @@ public class Subarrays {
         System.out.println("maxSum = " + maxSum);
     }
 
+    // #3 Kadane's Algorithm
+    // Optimal Approach
+    public static void kadanes(int arr[]) {
+        int maxSum = Integer.MIN_VALUE;
+        int currSum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            currSum += arr[i];
+            if (isNegative(arr)) {
+                maxSum = currSum; // set maxSum as currSum.
+            }
+            maxSum = Math.max(currSum, maxSum);
+        }
+        System.out.println("Maximum sum : " + maxSum);
+    }
+
+    // Function to check whether complete array is negative.
+    public static boolean isNegative(int arr[]) {
+        for (int i : arr) {
+            if (i < 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void main(String args[]) {
         System.out.println();
         Scanner sc = new Scanner(System.in);
@@ -62,6 +88,7 @@ public class Subarrays {
             numbers[i] = sc.nextInt();
         }
         // maxSubarraySum(numbers);
-        prefixSumSubarrays(numbers);
+        // prefixSumSubarrays(numbers);
+        kadanes(numbers);
     }
 }
