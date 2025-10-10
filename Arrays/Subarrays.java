@@ -2,7 +2,6 @@
 * Problem Statement :
 * Max Subarray Sum : Find the subarray with the largest sum
 */
-package Arrays;
 
 import java.util.*;
 
@@ -83,8 +82,9 @@ public class Subarrays {
             System.out.println("Enter numbers: ");
             numbers[i] = sc.nextInt();
         }
-        // maxSubarraySum(numbers);
-        // prefixSumSubarrays(numbers);
+        maxSubarraySum(numbers);
+        prefixSumSubarrays(numbers);
         kadanes(numbers);
+        sc.close();
     }
 }
