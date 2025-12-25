@@ -1,5 +1,5 @@
 /* Date: 25-12-2025
- * Check whether the given number is power of 2 or not using bitwise operators
+ * Count the set bits in given number.
 */
 
 package BitManipulation;
